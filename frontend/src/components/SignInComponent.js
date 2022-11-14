@@ -5,6 +5,11 @@ import Grid from '@mui/system/Unstable_Grid';
 import { Stack } from '@mui/system';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import { BrowserRouter as Router, Routes, Route, useNavigate, Navigate, } from 'react-router-dom'
+
+
+
+
 
 const titleStyle = {
     fontSize: 'h4.fontSize',
@@ -47,57 +52,69 @@ const btnText = {
     lineHeight: '34px',
 }
 
-
-class SignInComponent extends Component {
-    constructor(props) {
-        super(props);
-    }
-    componentDidMount() {
-        document.body.style.backgroundColor = ' #E2E3EA'
-    }
-    render() {
-        return (
-            <Box sx={{ height: '100%', width: '100%' }} ml={10}>
+const contentSytle = {
+    fontSize: 'h6.fontSize',
+    fontWeight: 'Regular',
+    lineHeight: '34px',
+    lineHeight: '34px',
+}
 
 
-                <Stack spacing={3}>
-                    <Typography component="div" sx={titleStyle} mt={18}>
-                        Login To Your Account
+function SignInComponent() {
+
+    const navigate = useNavigate()
+    return (
+        <Box sx={{ height: '100%', width: '100%' }} ml={10}>
+
+            <Stack spacing={3}>
+                <Typography component="div" sx={titleStyle} mt={18}>
+                    Login To Your Account
+                </Typography>
+                <Typography component="div" sx={contentStyle} >
+                    USERNAME
+                </Typography>
+            </Stack>
+            <Stack spacing={2}>
+                <TextField required id="TFuserName" label="name" variant="outlined" sx={textFieldStyle} />
+                <Typography component="div" sx={contentStyle}>
+                    PASSWORD
+                </Typography>
+            </Stack>
+            <Stack spacing={2}>
+                <TextField required id="TFpassword" label="password" variant="outlined" sx={textFieldStyle} />
+                <Button variant="contained" sx={btnStyle1} onClick={() => {
+                    navigate('/home')
+                }} mt={5}>
+                    <Typography component="div" sx={btnText} mt={1}>
+                        PASSWORD LOGIN
                     </Typography>
-                    <Typography component="div" sx={contentStyle} >
-                        USERNAME
+                </Button>
+
+                <Button variant="contained" sx={btnStyle2}>
+                    <Typography component="div" sx={btnText} onClick={() => {
+                        navigate('/faceid')
+                    }} mt={1}>
+                        FACE ID LOGIN
                     </Typography>
-                </Stack>
-                <Stack spacing={2}>
-                    <TextField Required id="TFuserName" label="name" variant="outlined" sx={textFieldStyle} />
-                    <Typography component="div" sx={contentStyle}>
-                        PASSWORD
-                    </Typography>
-                </Stack>
-                <Stack spacing={2}>
-                    <TextField Required id="TFpassword" label="password" variant="outlined" sx={textFieldStyle} />
-                    <Button variant="contained" sx={btnStyle1} mt={5}>
-                        <Typography component="div" sx={btnText} mt={1}>
-                            PASSWORD LOGIN
-                        </Typography>
+                </Button>
+            </Stack>
+            <Stack direction="row" my={0}>
+
+                <Typography component="div" sx={contentSytle} mt={5} onClick={() => {
+                        navigate('/signup')
+                    }} >
+                    Don't have an account?
+                    <Button variant="text" sx={contentSytle} >
+                        Sign UP
                     </Button>
-                    <Stack spacing={.2} direction="row">
-                        <Box sx={{ flexGrow:.335 }}> </Box>
-                        <Typography component="div" sx={contentStyle} >
-                            OR
-                        </Typography>
-                    </Stack>
-                    <Button variant="contained" sx={btnStyle2}>
-                        <Typography component="div" sx={btnText} mt={1}>
-                            FACE ID LOGIN
-                        </Typography>
-                    </Button>
-                </Stack>
+                </Typography>
+            </Stack>
 
 
-            </Box>
-        );
-    }
+
+        </Box>
+    );
+
 }
 
 export default SignInComponent;

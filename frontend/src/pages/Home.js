@@ -19,16 +19,10 @@ const subTitleStyle = {
 }
 
 
-class Home extends Component {
-    constructor(props) {
-        super(props);
-    }
-    componentDidMount() {
-        document.body.style.backgroundColor = 'rgba(226, 227, 234, 0.27)'
-    }
-    render() {
+function Home()  {
+
         return (
-            <Box sx={{ width: '100%' }}>
+            <Box sx={{ width: '100%' , backgroundColor: 'rgba(226, 227, 234, 0.27)'}}>
                 <Stack spacing={2}>
                     <div></div>
                     <Grid container spacing={2}>
@@ -57,7 +51,7 @@ class Home extends Component {
                 </Stack>
             </Box>
         );
-    }
+    
 }
 
 export default Home;

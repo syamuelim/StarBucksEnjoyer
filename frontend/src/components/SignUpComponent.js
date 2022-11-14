@@ -48,56 +48,50 @@ const btnText = {
 }
 
 
-class SignUpComponent extends Component {
-    constructor(props) {
-        super(props);
-    }
-    componentDidMount() {
-        document.body.style.backgroundColor = ' #E2E3EA'
-    }
-    render() {
-        return (
-            <Box sx={{ height: '100%', width: '100%'}} ml={10}>
+function SignUpComponent() {
+
+    return (
+        <Box sx={{ height: '100%', width: '100%' }} ml={10}>
 
 
-                <Stack spacing={3}>
-                    <Typography component="div" sx={titleStyle} mt={18}>
-                        Create an Account
+            <Stack spacing={3}>
+                <Typography component="div" sx={titleStyle} mt={18}>
+                    Create an Account
+                </Typography>
+                <Typography component="div" sx={contentStyle} >
+                    USERNAME
+                </Typography>
+            </Stack>
+            <Stack spacing={2}>
+                <TextField Required id="TFuserName" label="name" variant="outlined" sx={textFieldStyle} />
+                <Typography component="div" sx={contentStyle}>
+                    EMAIL
+                </Typography>
+            </Stack>
+            <Stack spacing={2}>
+                <TextField Required id="TFemail" label="email" variant="outlined" sx={textFieldStyle} />
+                <Typography component="div" sx={contentStyle}>
+                    PASSWORD
+                </Typography>
+            </Stack>
+            <Stack spacing={2}>
+                <TextField Required id="TFpassword" label="password" variant="outlined" sx={textFieldStyle} />
+                <Button variant="contained" sx={btnStyle1} mt={5}>
+                    <Typography component="div" sx={btnText} mt={1}>
+                        ADD YOUR FACE ID
                     </Typography>
-                    <Typography component="div" sx={contentStyle} >
-                        USERNAME
+                </Button>
+                <Button variant="contained" sx={btnStyle2}>
+                    <Typography component="div" sx={btnText} mt={1}>
+                        SIGN UP
                     </Typography>
-                </Stack>
-                <Stack spacing={2}>
-                    <TextField Required id="TFuserName" label="name" variant="outlined" sx={textFieldStyle} />
-                    <Typography component="div" sx={contentStyle}>
-                        EMAIL
-                    </Typography>
-                </Stack>
-                <Stack spacing={2}>
-                    <TextField Required id="TFemail" label="email" variant="outlined" sx={textFieldStyle} />
-                    <Typography component="div" sx={contentStyle}>
-                        PASSWORD
-                    </Typography>
-                </Stack>
-                <Stack spacing={2}>
-                    <TextField Required id="TFpassword" label="password" variant="outlined" sx={textFieldStyle} />
-                    <Button variant="contained" sx={btnStyle1} mt={5}>
-                        <Typography component="div" sx={btnText} mt={1}>
-                            ADD YOUR FACE ID
-                        </Typography>
-                    </Button>
-                    <Button variant="contained" sx={btnStyle2}>
-                        <Typography component="div" sx={btnText} mt={1}>
-                            SIGN UP
-                        </Typography>
-                    </Button>
-                </Stack>
+                </Button>
+            </Stack>
 
 
-            </Box>
-        );
-    }
+        </Box>
+    );
+
 }
 
 export default SignUpComponent;

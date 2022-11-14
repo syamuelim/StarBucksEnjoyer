@@ -7,10 +7,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import HistoryIcon from '@mui/icons-material/History';
 import {
-    BrowserRouter,
-    Route,
-    Switch,
-    Link
+    useNavigate
 } from 'react-router-dom';
 
 const colors = require('../assets/color.js');
@@ -21,27 +18,33 @@ const btnStyle = {
 
 };
 
-class NavBar extends Component {
-    render() {
-        return (
-            <AppBar position="fixed" sx={{ top: 'auto', bottom: 0, background: "#F8C7C7" }}>
-                <Toolbar color="#F8C7C7">
-                    <Box sx={{ flexGrow: .2 }} />
-                    <IconButton aria-label="Home">
-                        <HomeIcon sx={btnStyle} />
-                    </IconButton>
-                    <Box sx={{ flexGrow: .3 }} />
-                    <IconButton >
-                        <HistoryIcon sx={btnStyle}/>
-                    </IconButton>
-                    <Box sx={{ flexGrow: .2 }} />
-                    <IconButton >
-                        <ExitToAppIcon sx={btnStyle}/>
-                    </IconButton>
-                </Toolbar>
-            </AppBar>
-        );
-    }
+function NavBar() {
+    const navigate = useNavigate();
+    return (
+        <AppBar position="fixed" sx={{ top: 'auto', bottom: 0, background: "#F8C7C7" }}>
+            <Toolbar color="#F8C7C7">
+                <Box sx={{ flexGrow: .2 }} />
+                <IconButton aria-label="Home" onClick={() => {
+                        navigate('/home')
+                    }} >
+                    <HomeIcon sx={btnStyle} />
+                </IconButton>
+                <Box sx={{ flexGrow: .3 }} />
+                <IconButton onClick={() => {
+                        navigate('/action')
+                    }} >
+                    <HistoryIcon sx={btnStyle} />
+                </IconButton>
+                <Box sx={{ flexGrow: .2 }} />
+                <IconButton onClick={() => {
+                        navigate('/')
+                    }} >
+                    <ExitToAppIcon sx={btnStyle} />
+                </IconButton>
+            </Toolbar>
+        </AppBar>
+    );
+
 }
 
 export default NavBar;

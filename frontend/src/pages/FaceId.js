@@ -21,9 +21,9 @@ class FaceId extends Component {
         return (
             <Box sx={{ width: '60%', height: "100%" }} align='center' my={5} ml={45}>
                 <Box sx={{ width: '60%', height: "55%" }} align="center">
-                    {/* <FaceIdComponent></FaceIdComponent> */}
+                    <FaceIdComponent></FaceIdComponent>
                     {/* <Verified></Verified> */}
-                    <Successful></Successful>
+                    {/* <Successful></Successful> */}
                 </Box>
             </Box>
         );

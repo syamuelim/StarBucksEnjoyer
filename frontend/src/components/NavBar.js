@@ -21,28 +21,28 @@ const btnStyle = {
 function NavBar() {
     const navigate = useNavigate();
     return (
-        <AppBar position="fixed" sx={{ top: 'auto', bottom: 0, background: "#F8C7C7" }}>
-            <Toolbar color="#F8C7C7">
-                <Box sx={{ flexGrow: .2 }} />
-                <IconButton aria-label="Home" onClick={() => {
-                        navigate('/home')
-                    }} >
-                    <HomeIcon sx={btnStyle} />
-                </IconButton>
-                <Box sx={{ flexGrow: .3 }} />
-                <IconButton onClick={() => {
-                        navigate('/action')
-                    }} >
-                    <HistoryIcon sx={btnStyle} />
-                </IconButton>
-                <Box sx={{ flexGrow: .2 }} />
-                <IconButton onClick={() => {
-                        navigate('/')
-                    }} >
-                    <ExitToAppIcon sx={btnStyle} />
-                </IconButton>
-            </Toolbar>
-        </AppBar>
+           sessionStorage.getItem('user') == null ? (<AppBar position="fixed" sx={{ top: 'auto', bottom: 0, background: "#F8C7C7" }}>
+                <Toolbar color="#F8C7C7">
+                    <Box sx={{ flexGrow: .2 }} />
+                    <IconButton aria-label="Home" onClick={() => {
+                            navigate('/home')
+                        }} >
+                        <HomeIcon sx={btnStyle} />
+                    </IconButton>
+                    <Box sx={{ flexGrow: .3 }} />
+                    <IconButton onClick={() => {
+                            navigate('/action')
+                        }} >
+                        <HistoryIcon sx={btnStyle} />
+                    </IconButton>
+                    <Box sx={{ flexGrow: .2 }} />
+                    <IconButton onClick={() => {
+                            navigate('/')
+                        }} >
+                        <ExitToAppIcon sx={btnStyle} />
+                    </IconButton>
+                </Toolbar>
+            </AppBar> ) : null
     );
 
 }

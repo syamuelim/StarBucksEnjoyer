@@ -24,9 +24,12 @@ const subTitleStyle = {
 class SignUp extends Component {
     constructor(props) {
         super(props);
+
     }
     componentDidMount() {
         document.body.style.backgroundColor = 'rgba(226, 227, 234, 0.27)'
+        window.sessionStorage.setItem("user", "");
+
     }
     render() {
         return (

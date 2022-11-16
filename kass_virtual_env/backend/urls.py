@@ -9,7 +9,7 @@ from django.conf import settings
 urlpatterns = [
     path('', views.app, name='home'),
     path('student/', views.StudentAPI),
-    path('student/<int:pk>/', views.StudentAPI),
+    path('student/<str:email>/', views.StudentAPI),
     path('login_hist/', views.LoginHistoryAPI),
     path('login_hist/<int:pk>/', views.LoginHistoryAPI),
     path('course/', views.CourseAPI),

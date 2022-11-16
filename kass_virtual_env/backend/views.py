@@ -20,9 +20,11 @@ from django.http import HttpResponse
 
 
 @csrf_exempt
-def StudentAPI(request, pk=0):
+def StudentAPI(request, email=''):
     if request.method == 'GET': #read
         student = Student.objects.all()
+        if email != '':
+            student = student.filter(email=email)
         student_serializer = StudentSerializer(student, many=True)
         return JsonResponse(student_serializer.data, safe=False) #return info to the browser
     elif request.method == 'POST': #create

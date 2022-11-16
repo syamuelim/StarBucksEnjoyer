@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useRef } from "react";
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Grid from '@mui/system/Unstable_Grid';
@@ -61,6 +61,35 @@ const contentSytle = {
 
 
 function SignInComponent() {
+    const email = useRef('')
+    const password = useRef('')
+    async function login() {
+        if (email.current.value === '') {
+            alert('please enter a valid email')
+        }
+
+        fetch("http://127.0.0.1:8000/backend/student/" + email.current.value)
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    if (result == '') {
+                        alert('user not found')
+                    } else {
+                        console.log(result[0].student_id)
+                        if (result[0].email == email.current.value && password.current.value == password.current.value) {
+                            alert('login successful')
+                            console.log('success', result.name)
+                            window.sessionStorage.setItem("user", result[0].student_id);
+                            navigate('/home')
+                        }
+                    }
+                },
+                (error) => {
+                    console.log(error)
+                }
+            )
+        
+    }
 
     const navigate = useNavigate()
     return (
@@ -71,20 +100,20 @@ function SignInComponent() {
                     Login To Your Account
                 </Typography>
                 <Typography component="div" sx={contentStyle} >
-                    USERNAME
+                    EMAIL
                 </Typography>
             </Stack>
             <Stack spacing={2}>
-                <TextField required id="TFuserName" label="name" variant="outlined" sx={textFieldStyle} />
+                <TextField required inputRef={email} id="TFuserName" label="email" variant="outlined" sx={textFieldStyle} />
                 <Typography component="div" sx={contentStyle}>
                     PASSWORD
                 </Typography>
             </Stack>
             <Stack spacing={2}>
-                <TextField required id="TFpassword" label="password" variant="outlined" sx={textFieldStyle} />
-                <Button variant="contained" sx={btnStyle1} onClick={() => {
-                    navigate('/home')
-                }} mt={5}>
+                <TextField required inputRef={password} id="TFpassword" label="password" variant="outlined" sx={textFieldStyle} />
+                <Button variant="contained" sx={btnStyle1} onClick={
+                    login
+                } mt={5}>
                     <Typography component="div" sx={btnText} mt={1}>
                         PASSWORD LOGIN
                     </Typography>
@@ -101,8 +130,8 @@ function SignInComponent() {
             <Stack direction="row" my={0}>
 
                 <Typography component="div" sx={contentSytle} mt={5} onClick={() => {
-                        navigate('/signup')
-                    }} >
+                    navigate('/signup')
+                }} >
                     Don't have an account?
                     <Button variant="text" sx={contentSytle} >
                         Sign UP

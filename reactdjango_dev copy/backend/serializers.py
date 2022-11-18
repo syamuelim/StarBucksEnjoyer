@@ -55,3 +55,10 @@ class EnrollmentSerializer(serializers.ModelSerializer):
         model = Enrollment
         fields = ('student_id',
                   'course_id',)
+
+class CreateStudentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Student
+        fields = ('name',
+                  'email',
+                  'face_images')

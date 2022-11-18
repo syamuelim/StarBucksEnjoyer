@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from rest_framework import generics, status
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
 from django.http.response import JsonResponse
@@ -6,22 +7,20 @@ from django.core.files.storage import default_storage
 from rest_framework.decorators import api_view
 from rest_framework.generics import CreateAPIView
 from rest_framework.response import Response
-from backend.models import Student
-from backend.serializers import StudentSerializer
-from backend.models import LoginHist
-from backend.serializers import LoginHistSerializer
-from backend.models import Class
-from backend.serializers import ClassSerializer
-from backend.models import Course
-from backend.serializers import CourseSerializer
-from backend.models import Material
-from backend.serializers import MaterialSerializer
-from backend.models import Enrollment
-from backend.serializers import EnrollmentSerializer
+from rest_framework.views import APIView
 
-from django.http import HttpResponse
+from .models import Student
+from .serializers import StudentSerializer, CreateStudentSerializer
+from .models import LoginHist
+from .serializers import LoginHistSerializer
+from .models import Class
+from .serializers import ClassSerializer
+from .models import Course
+from .serializers import CourseSerializer
+from .models import Material
+from .serializers import MaterialSerializer
 
-
+import random
 @csrf_exempt
 def StudentAPI(request, pk=0):
     if request.method == 'GET': #read
@@ -87,7 +86,6 @@ def ClassAPI(request, pk=0):
         classes.delete()
         return JsonResponse("Class Was Deleted Successfully", safe=False)
 
-@csrf_exempt
 def MaterialAPI(request, pk=0):
     if request.method == 'GET': #read
         material = Material.objects.all()
@@ -105,23 +103,29 @@ def MaterialAPI(request, pk=0):
         material.delete()
         return JsonResponse("Class Was Deleted Successfully", safe=False)
 
-@csrf_exempt
-def EnrollmentAPI(request, pk=0):
-    if request.method == 'GET': #read
-        enrollment = Enrollment.objects.all()
-        enrollment_serializer = EnrollmentSerializer(enrollment, many=True)
-        return JsonResponse(enrollment_serializer.data, safe=False) #return info to the browser
-    elif request.method == 'POST': #create
-        enrollment_data = JSONParser().parse(request)
-        enrollment_serializer = EnrollmentSerializer(data=enrollment_data)
-        if enrollment_serializer.is_valid():
-            enrollment_serializer.save()
-            return JsonResponse("Enrollment Added Successfully", safe=False)
-        return JsonResponse("Failed To Add Enrollment", safe=False)
-    elif request.method == 'DELETE': #delete
-        enrollment = Enrollment.objects.get(student_id=pk)
-        enrollment.delete()
-        return JsonResponse("Enrollment Was Deleted Successfully", safe=False)
+class CreateStudentView(APIView):
+    serializer_class = CreateStudentSerializer
+
+    def post(self, request, format=None):
+        if not self.request.session.exists(self.request.session.session_key):
+            self.request.session.create()
+
+        serializer = self.serializer_class(data=request.data)
+        if serializer.is_valid():
+            student_id = random.randrange(0, 1000, 1)
+            name = serializer.data.get("name")
+            email = serializer.data.get("email")
+            print(request.FILES)
+            if len(request.FILES) != 0:
+                face_images = request.FILES["face_images"]
+
+            student = Student(student_id = student_id, name=name, email=email, face_images=face_images)
+            student.save()
+
+            return Response(StudentSerializer(student).data, status=status.HTTP_201_CREATED)
+
+        else:
+            return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
 
 def app(request):
     # return HttpResponse('Hello,World')

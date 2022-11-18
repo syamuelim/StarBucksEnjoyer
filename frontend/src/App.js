@@ -7,6 +7,7 @@ import Home from './pages/Home.js';
 import SignIn from './pages/SignIn.js';
 import SignUP from './pages/SignUp.js';
 import FaceId from './pages/FaceId.js';
+import FaceIdSignUp from './components/FaceIdSignUp';
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <Route path='/signup' element={<SignUP/>}/>
         <Route path='/' element={<SignIn/>}/>
         <Route path='/faceid' element={<FaceId/>}/>
+        <Route path='/faceid/signup' element={<FaceIdSignUp/>}/>
       </Routes>
     </Router>
   );

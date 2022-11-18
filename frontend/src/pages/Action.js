@@ -37,9 +37,9 @@ class Action extends Component {
                                 <Box sx={titleStyle}>Wellcome, Adrian</Box>
                             </Typography>
                         </Grid>
-                        <Box sx={{ width: '95%', height: '780px' ,ml:7}} >
-                        <History pl={5}></History>
-                    </Box>
+                        <Box sx={{ width: '95%', height: '780px', ml: 7 }} >
+                            <History pl={5}></History>
+                        </Box>
                     </Grid>
 
 

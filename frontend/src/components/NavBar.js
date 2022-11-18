@@ -21,7 +21,7 @@ const btnStyle = {
 function NavBar() {
     const navigate = useNavigate();
     return (
-           sessionStorage.getItem('user') == null ? (<AppBar position="fixed" sx={{ top: 'auto', bottom: 0, background: "#F8C7C7" }}>
+           sessionStorage.getItem('user') == '' ? (<AppBar position="fixed" sx={{ top: 'auto', bottom: 0, background: "#F8C7C7" }}>
                 <Toolbar color="#F8C7C7">
                     <Box sx={{ flexGrow: .2 }} />
                     <IconButton aria-label="Home" onClick={() => {

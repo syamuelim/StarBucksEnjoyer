@@ -8,6 +8,7 @@ class Student(models.Model):
 
 class LoginHist(models.Model):
     login_time = models.DateTimeField(primary_key=True)
+    logout_time = models.DateTimeField()
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
     time_stayed = models.CharField(max_length=100)
 
@@ -33,3 +34,6 @@ class Material(models.Model):
     note_type = models.CharField(max_length=100)
     note_link = models.CharField(max_length=100)
 
+class Enrollment(models.Model):
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    student = models.ForeignKey(Student, on_delete=models.CASCADE)

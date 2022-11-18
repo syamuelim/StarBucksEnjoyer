@@ -4,6 +4,7 @@ from backend.models import LoginHist
 from backend.models import Class
 from backend.models import Course
 from backend.models import Material
+from backend.models import Enrollment
 
 class StudentSerializer(serializers.ModelSerializer):
     class Meta:
@@ -17,6 +18,7 @@ class LoginHistSerializer(serializers.ModelSerializer):
     class Meta: 
         model = LoginHist
         fields = ('login_time',
+                  'logout_time',
                   'student_id',
                   'time_stayed')
 
@@ -47,3 +49,9 @@ class MaterialSerializer(serializers.ModelSerializer):
                  'note_title',
                  'note_type',
                  'note_link')
+
+class EnrollmentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Enrollment
+        fields = ('student_id',
+                  'course_id',)

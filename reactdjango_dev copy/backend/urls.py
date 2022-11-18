@@ -18,6 +18,8 @@ urlpatterns = [
     path('class/<pk>/', views.ClassAPI),
     path('material/', views.MaterialAPI),
     path('material/<pk>/', views.MaterialAPI),
+    path('enrollment/', views.EnrollmentAPI),
+    path('enrollment/<pk>/', views.EnrollmentAPI),
 ]
 
 if settings.DEBUG:

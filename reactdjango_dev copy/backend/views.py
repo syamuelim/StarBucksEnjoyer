@@ -16,6 +16,9 @@ from backend.models import Course
 from backend.serializers import CourseSerializer
 from backend.models import Material
 from backend.serializers import MaterialSerializer
+from backend.models import Enrollment
+from backend.serializers import EnrollmentSerializer
+
 from django.http import HttpResponse
 
 
@@ -84,6 +87,7 @@ def ClassAPI(request, pk=0):
         classes.delete()
         return JsonResponse("Class Was Deleted Successfully", safe=False)
 
+@csrf_exempt
 def MaterialAPI(request, pk=0):
     if request.method == 'GET': #read
         material = Material.objects.all()
@@ -100,6 +104,24 @@ def MaterialAPI(request, pk=0):
         material = Material.objects.get(course_code=pk)
         material.delete()
         return JsonResponse("Class Was Deleted Successfully", safe=False)
+
+@csrf_exempt
+def EnrollmentAPI(request, pk=0):
+    if request.method == 'GET': #read
+        enrollment = Enrollment.objects.all()
+        enrollment_serializer = EnrollmentSerializer(enrollment, many=True)
+        return JsonResponse(enrollment_serializer.data, safe=False) #return info to the browser
+    elif request.method == 'POST': #create
+        enrollment_data = JSONParser().parse(request)
+        enrollment_serializer = EnrollmentSerializer(data=enrollment_data)
+        if enrollment_serializer.is_valid():
+            enrollment_serializer.save()
+            return JsonResponse("Enrollment Added Successfully", safe=False)
+        return JsonResponse("Failed To Add Enrollment", safe=False)
+    elif request.method == 'DELETE': #delete
+        enrollment = Enrollment.objects.get(student_id=pk)
+        enrollment.delete()
+        return JsonResponse("Enrollment Was Deleted Successfully", safe=False)
 
 def app(request):
     # return HttpResponse('Hello,World')

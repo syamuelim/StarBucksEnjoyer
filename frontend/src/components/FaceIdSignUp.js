@@ -1,4 +1,4 @@
-import React, { Component, useState, useRef } from "react";
+import React, { Component, useState, useRef, useEffect } from "react";
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import { Stack } from '@mui/system';
@@ -73,10 +73,10 @@ const imgStyle = {
     display: 'flex', justifyContent: 'center'
 }
 
-function FaceIdComponent() {
+function FaceIdSignUp() {
 
     const navigate = useNavigate()
-    const [openWebCam, setOpenWebCam] = useState(false);
+    const [openWebCam, setOpenWebCam] = useState(true);
     const videoElement = useRef(null);
     const videoConstraints = {
         width: 226,
@@ -94,6 +94,12 @@ function FaceIdComponent() {
     const openCam = () => {
         setOpenWebCam(true);
     }
+    useEffect(() => {
+        const interval = setInterval(() => {
+            capture()
+        }, 1000);
+        return () => clearInterval(interval);
+    }, []);
 
     // const takePhoto = () => {
     //   le.log(getScreenshot({ width: 1920, height: 1080 }))
@@ -108,7 +114,7 @@ function FaceIdComponent() {
                 </Typography>
                 <Box sx={{ flexGrow: 3 }}></Box>
                 <Typography component="div" sx={subTitleStyle} mt={2}>
-                    Login To Your Account
+                    Record Your Face
                 </Typography>
                 <Stack direction="row" my={0}>
                     <Box sx={{ flexGrow: .5 }}></Box>
@@ -166,4 +172,4 @@ function FaceIdComponent() {
 
 }
 
-export default FaceIdComponent;
+export default FaceIdSignUp;

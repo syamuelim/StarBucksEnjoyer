@@ -1,10 +1,12 @@
-import React, { Component } from "react";
+import React, { Component, useState, useRef } from "react";
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Grid from '@mui/system/Unstable_Grid';
 import { Stack } from '@mui/system';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import { useNavigate } from 'react-router-dom';
+
 
 const titleStyle = {
     fontSize: 'h4.fontSize',
@@ -49,6 +51,8 @@ const btnText = {
 
 
 function SignUpComponent() {
+    const navigate = useNavigate()
+
 
     return (
         <Box sx={{ height: '100%', width: '100%' }} ml={10}>
@@ -76,17 +80,23 @@ function SignUpComponent() {
             </Stack>
             <Stack spacing={2}>
                 <TextField Required id="TFpassword" label="password" variant="outlined" sx={textFieldStyle} />
-                <Button variant="contained" sx={btnStyle1} mt={5}>
+                <Button variant="contained" sx={btnStyle1} mt={5} onClick={() => {
+                    navigate('/faceid/signup')
+                }} >
                     <Typography component="div" sx={btnText} mt={1}>
                         ADD YOUR FACE ID
                     </Typography>
                 </Button>
                 <Button variant="contained" sx={btnStyle2}>
-                    <Typography component="div" sx={btnText} mt={1}>
+                    <Typography component="div" sx={btnText} mt={1} onClick={() => {
+                        navigate('/signup')
+                    }} >
                         SIGN UP
                     </Typography>
                 </Button>
+
             </Stack>
+
 
 
         </Box>

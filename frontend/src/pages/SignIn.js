@@ -5,6 +5,7 @@ import Grid from '@mui/system/Unstable_Grid';
 import { Stack } from '@mui/system';
 import SignInComponent from '../components/SignInComponent.js';
 import cover from '../assets/cover.png';
+import FaceIdComponent from '../components/FaceIdComponent.js'
 
 
 const titleStyle = {
@@ -33,9 +34,10 @@ class SignUp extends Component {
     }
     render() {
         return (
-                <Stack direction="row" sx={{height:'100%'}}>
+                <Stack direction="row" sx={{height:'100%'}} spacing={2}>
                     <img src={cover} alt="cover" />
-                    <SignInComponent></SignInComponent>
+                    {/* <SignInComponent></SignInComponent> */}
+                    <FaceIdComponent sx={{paddingTopL: '30',alignItems: 'center'}}></FaceIdComponent>
                 </Stack>
         );
     }

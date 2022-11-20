@@ -19,8 +19,6 @@ const subTitleStyle = {
     lineHeight: '44px',
 }
 
-
-
 class SignUp extends Component {
     constructor(props) {
         super(props);

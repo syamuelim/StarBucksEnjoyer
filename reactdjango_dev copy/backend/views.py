@@ -19,6 +19,8 @@ from .models import Course
 from .serializers import CourseSerializer
 from .models import Material
 from .serializers import MaterialSerializer
+from .models import Enrollment
+from .serializers import EnrollmentSerializer
 
 import random
 @csrf_exempt
@@ -102,6 +104,13 @@ def MaterialAPI(request, pk=0):
         material = Material.objects.get(course_code=pk)
         material.delete()
         return JsonResponse("Class Was Deleted Successfully", safe=False)
+
+def EnrollmentAPI(request, pk=0):
+    if request.method == 'GET': #read
+        enrollment = Enrollment.objects.all()
+        enrollment_serializer = EnrollmentSerializer(Enrollment, many=True)
+        return JsonResponse(enrollment_serializer.data, safe=False) #return info to the browser
+
 
 class CreateStudentView(APIView):
     serializer_class = CreateStudentSerializer

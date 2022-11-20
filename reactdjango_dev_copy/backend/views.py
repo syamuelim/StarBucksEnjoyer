@@ -41,6 +41,22 @@ def StudentAPI(request, pk=0):
         student.delete()
         return JsonResponse("Student Was Deleted Successfully", safe=False)
 
+# @csrf_exempt
+# def LoginHistoryAPI(request, pk=0):
+#     if request.method == 'GET':
+#         if pk == 0:
+#             login_history = LoginHist.objects.all()
+#             login_history_serializer = LoginHistSerializer(login_history, many=True)
+#             return JsonResponse(login_history_serializer.data, safe=False)
+#         else:
+#             login_history = LoginHist.objects.filter(student_id=pk)
+#             login_history_serializer = LoginHistSerializer(login_history, many=True)
+#             return JsonResponse(login_history_serializer.data, safe=False)
+#     elif request.method == 'DELETE': #delete
+#         login_history = LoginHist.objects.get(student_id=pk)
+#         login_history.delete()
+#         return JsonResponse("Student's Login History Was Deleted Successfully", safe=False)
+
 @csrf_exempt
 def LoginHistoryAPI(request, pk=0):
     if request.method == 'GET':
@@ -56,7 +72,7 @@ def LoginHistoryAPI(request, pk=0):
         login_history = LoginHist.objects.get(student_id=pk)
         login_history.delete()
         return JsonResponse("Student's Login History Was Deleted Successfully", safe=False)
-
+        
 @csrf_exempt
 def CourseAPI(request, pk=0):
    if request.method == 'GET': #read

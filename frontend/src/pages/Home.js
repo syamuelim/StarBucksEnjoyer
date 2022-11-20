@@ -8,6 +8,7 @@ import TimeTable from '../components/TimeTable.js';
 import Button from '@mui/material/Button';
 import InfoBar from '../components/InfoBar.js'
 import Toolbar from '@mui/material/Toolbar';
+import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
 
 const HomeTitleStyle = {
     fontSize: 'h4.fontSize',
@@ -129,6 +130,7 @@ const TcontentBarStyle = {
 
 
 function Home() {
+    const navigate = useNavigate()
     const [name, setName] = useState(null)
     const [id, setId] = useState(null)
     const [ready, setReady] = useState(false)
@@ -302,9 +304,17 @@ function Home() {
                                             <Box sx={{ flexGrow: .25 }} />
                                             <Button variant="text" sx={infoBtnStyle} href={upComingClass.zoom_link}>Zoom </Button>
                                             <Box sx={{ flexGrow: .3 }} />
-                                            <Button variant="text" sx={infoBtnStyle}>Lecture</Button>
+                                            <Button variant="text" sx={infoBtnStyle} onClick={() => {
+                                                sessionStorage.setItem('course_id', upComingClass.course_id);
+                                                sessionStorage.setItem('type', 'lecture');
+                                                navigate('/material')
+                                            }}>Lecture</Button>
                                             <Box sx={{ flexGrow: .2 }} />
-                                            <Button variant="text" sx={infoBtnStyle}>Tutorial</Button>
+                                            <Button variant="text" sx={infoBtnStyle} onClick={() => {
+                                                sessionStorage.setItem('course_id', upComingClass.course_id);
+                                                sessionStorage.setItem('type', 'tutorial');
+                                                navigate('/material')
+                                            }}>Tutorial</Button>
                                         </Toolbar>
 
                                     </Box>

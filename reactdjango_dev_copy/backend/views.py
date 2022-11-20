@@ -99,11 +99,16 @@ def ClassAPI(request, pk=0):
         return JsonResponse("Class Was Deleted Successfully", safe=False)
 
 @csrf_exempt
-def MaterialAPI(request, pk=0):
+def MaterialAPI(request, pk=0, type=None):
     if request.method == 'GET': #read
-        material = Material.objects.all()
-        material_serializer = MaterialSerializer(material, many=True)
-        return JsonResponse(material_serializer.data, safe=False) #return info to the browser
+        if pk == 0:
+            material = Material.objects.all()
+            material_serializer = MaterialSerializer(material, many=True)
+            return JsonResponse(material_serializer.data, safe=False) #return info to the browser
+        else:
+            material = Material.objects.filter(course_id=pk)
+            material_serializer = MaterialSerializer(material, many=True)
+            return JsonResponse(material_serializer.data, safe=False) #return info to the browser
     elif request.method == 'POST': #create
         material_data = JSONParser().parse(request)
         material_serializer = MaterialSerializer(data=material_data)

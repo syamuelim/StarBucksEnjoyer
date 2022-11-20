@@ -8,6 +8,7 @@ import SignIn from './pages/SignIn.js';
 import SignUP from './pages/SignUp.js';
 import FaceId from './pages/FaceId.js';
 import FaceIdSignUp from './components/FaceIdSignUp';
+import Material from './pages/Material.js';
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <Route path='/action' element={<Action/>}/>
         <Route path='/signup' element={<SignUP/>}/>
         <Route path='/' element={<SignIn/>}/>
+        <Route path='/material' element={<Material/>}/>
         <Route path='/faceid' element={<FaceId/>}/>
         <Route path='/faceid/signup' element={<FaceIdSignUp/>}/>
       </Routes>

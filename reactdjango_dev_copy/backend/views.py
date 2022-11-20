@@ -88,6 +88,7 @@ def ClassAPI(request, pk=0):
         classes.delete()
         return JsonResponse("Class Was Deleted Successfully", safe=False)
 
+@csrf_exempt
 def MaterialAPI(request, pk=0):
     if request.method == 'GET': #read
         material = Material.objects.all()
@@ -105,10 +106,11 @@ def MaterialAPI(request, pk=0):
         material.delete()
         return JsonResponse("Class Was Deleted Successfully", safe=False)
 
+@csrf_exempt
 def EnrollmentAPI(request, pk=0):
     if request.method == 'GET': #read
         enrollment = Enrollment.objects.all()
-        enrollment_serializer = EnrollmentSerializer(Enrollment, many=True)
+        enrollment_serializer = EnrollmentSerializer(enrollment, many=True)
         return JsonResponse(enrollment_serializer.data, safe=False) #return info to the browser
 
 

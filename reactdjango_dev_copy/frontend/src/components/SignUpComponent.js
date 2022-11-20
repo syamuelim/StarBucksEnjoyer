@@ -49,6 +49,38 @@ const btnText = {
 
 
 function SignUpComponent() {
+    const navigate = useNavigate()
+    const email = useRef('')
+    const name = useRef('')
+    const addFace = () => {
+        let modelPath = ''
+        fetch("http://127.0.0.1:8000/backend/FaceRecognition/")
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    console.log('model trained')
+                },
+                (error) => {
+                    console.log(error)
+                }
+            )
+        const options = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name: name.current.value, email: email.current.value })
+        };
+        fetch('http://127.0.0.1:8000/backend/student/', options)
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    navigate('/signin')
+                },
+                (error) => {
+                    console.log(error)
+                }
+            );
+    }
+
 
     return (
         <Box sx={{ height: '100%', width: '100%' }} ml={10}>
@@ -63,30 +95,28 @@ function SignUpComponent() {
                 </Typography>
             </Stack>
             <Stack spacing={2}>
-                <TextField Required id="TFuserName" label="name" variant="outlined" sx={textFieldStyle} />
+                <TextField inputRef={name} Required id="TFuserName" label="name" variant="outlined" sx={textFieldStyle} />
                 <Typography component="div" sx={contentStyle}>
                     EMAIL
                 </Typography>
             </Stack>
             <Stack spacing={2}>
-                <TextField Required id="TFemail" label="email" variant="outlined" sx={textFieldStyle} />
-                <Typography component="div" sx={contentStyle}>
-                    PASSWORD
-                </Typography>
+                <TextField inputRef={email} Required id="TFemail" label="email" variant="outlined" sx={textFieldStyle} />
+
             </Stack>
             <Stack spacing={2}>
-                <TextField Required id="TFpassword" label="password" variant="outlined" sx={textFieldStyle} />
-                <Button variant="contained" sx={btnStyle1} mt={5}>
+                <Box></Box>
+                <Button variant="contained" sx={btnStyle1} mt={5} onClick={
+                    addFace
+                } >
                     <Typography component="div" sx={btnText} mt={1}>
                         ADD YOUR FACE ID
                     </Typography>
                 </Button>
-                <Button variant="contained" sx={btnStyle2}>
-                    <Typography component="div" sx={btnText} mt={1}>
-                        SIGN UP
-                    </Typography>
-                </Button>
+
+
             </Stack>
+
 
 
         </Box>

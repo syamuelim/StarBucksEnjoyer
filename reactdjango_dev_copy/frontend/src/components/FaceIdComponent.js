@@ -1,10 +1,3 @@
-// import React, { Component } from "react";
-// import Typography from '@mui/material/Typography';
-// import Box from '@mui/material/Box';
-// import { Stack } from '@mui/system';
-// import Button from '@mui/material/Button';
-// import FaceIDPic from './../../static/images/FaceID.png';
-
 import React, { Component, useState, useRef } from "react";
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
@@ -13,6 +6,7 @@ import Button from '@mui/material/Button';
 import FaceIDPic from './../../static/images/FaceID.png';
 import { useNavigate } from 'react-router-dom'
 import Webcam from "react-webcam";
+
 
 const boxStyle = {
     background: 'rgba(255, 255, 255, 0.84)',
@@ -119,11 +113,10 @@ function FaceIdComponent() {
     }
 
 
-
-
     return (
         <Stack width="100%">
             <Box sx={{ flexGrow: .5 }}></Box>
+            {/* <button onClick={runPython}> Click me </button> */}
             <Box sx={boxStyle}>
                 <Stack spacing={2}>
                     <Typography component="div" sx={titleStyle}>

@@ -80,6 +80,7 @@ function SignInComponent() {
                             alert('login successful')
                             console.log('success', result.name)
                             window.sessionStorage.setItem("user", result[0].student_id);
+                            window.sessionStorage.setItem("name", result[0].name);
                             navigate('/home')
                         }
                     }

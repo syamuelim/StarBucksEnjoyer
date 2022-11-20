@@ -13,7 +13,7 @@ class LoginHist(models.Model):
     time_stayed = models.CharField(max_length=100)
 
 class Course(models.Model):
-    course_id = models.IntegerField(primary_key=True)
+    course_id = models.AutoField(primary_key=True)
     course_code = models.CharField( max_length=100)
     course_name = models.CharField(max_length=100)
     lecturer = models.CharField(max_length=100)
@@ -21,7 +21,7 @@ class Course(models.Model):
 
 class Class(models.Model):
     class_id = models.IntegerField()
-    course_id = models.IntegerField()
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
     date = models.DateField(primary_key=True)
     classroom = models.CharField(max_length=100)
     start_time = models.TimeField()

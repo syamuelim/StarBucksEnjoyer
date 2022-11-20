@@ -75,7 +75,7 @@ function SignUpComponent() {
             .then(res => res.json())
             .then(
                 (result) => {
-                    navigate('/signin')
+                    navigate('/')
                 },
                 (error) => {
                     console.log(error)

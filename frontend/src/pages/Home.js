@@ -84,6 +84,49 @@ const infoBtnStyle = {
 
 };
 
+const TtitleStyle = {
+    fontSize: 'h5.fontSize',
+    fontWeight: 'Regular',
+    lineHeight: '44px',
+    left: '95px',
+    top: '171px',
+}
+
+const TsubTitleStyle = {
+    width: '287.6px',
+    height: '44.48px',
+    fontSize: 'h5.fontSize',
+    fontWeight: 'Bold',
+    lineHeight: '34px',
+    lineHeight: '34px',
+}
+
+const TcontentStyle = {
+    width: '400.6px',
+    height: '44.48px',
+    fontSize: 'h5.fontSize',
+    fontWeight: 'Regular',
+    lineHeight: '34px',
+    lineHeight: '34px',
+}
+
+const TtitleBarStyle = {
+    width: "1268x",
+    height: "71px",
+    left: '20%',
+    top: '234px',
+    background: 'rgba(255, 167, 38, 0.35)',
+    borderRadius: '28px'
+}
+
+const TcontentBarStyle = {
+    width: "1268x",
+    height: "87px",
+    background: '#FFFFFF',
+    boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+    borderRadius: '28px',
+}
+
 
 function Home() {
     const [name, setName] = useState(null)
@@ -93,12 +136,10 @@ function Home() {
     const [upComingClass, setUpComingClass] = useState(null)
     const [upComingCourse, setUpComingCourse] = useState(null)
     const [courseList, setCourseList] = useState([])
-
+    const [scheduledClass, setScheduledClass] = useState([])
 
     let classList = []
     let enrollment = []
-    //let upComingClass = []
-    // let upComingCourse = []
     let otherClass = []
 
 
@@ -112,36 +153,30 @@ function Home() {
                 .then(
                     (result) => {
                         for (let i in result) {
-
                             if (result[i].student_id == window.sessionStorage.getItem('id')) {
-
                                 fetch("http://127.0.0.1:8000/backend/enrollment/" + result[i].student_id)
                                     .then(res => res.json())
                                     .then(
                                         (enroll) => {
                                             enrollment = enroll
-                                            console.log('eroll', enrollment)
+
                                             fetch("http://127.0.0.1:8000/backend/course/")
                                                 .then(res => res.json())
                                                 .then(
                                                     (course) => {
-                                                        
+
                                                         setCourseList(course)
                                                         fetch("http://127.0.0.1:8000/backend/class/")
                                                             .then(res => res.json())
                                                             .then(
                                                                 (course) => {
                                                                     classList = course
-
-                                                                    console.log('class list', classList)
                                                                     let currentTime = new Date().getTime() + 28800000;
 
                                                                     for (let i in enrollment) {
                                                                         for (let j in classList) {
                                                                             if (classList[j].course_id == enrollment[i].course_id) {
-                                                                                console.log(classList[j].date)
                                                                                 let classTime = Date.parse(classList[j].date + 'T' + classList[j].start_time + 'Z')
-                                                                                console.log(classTime, currentTime, classTime - currentTime)
                                                                                 if (classTime - currentTime < 3600000 && classTime - currentTime > 0) {
 
 
@@ -149,15 +184,12 @@ function Home() {
                                                                                     fetch("http://127.0.0.1:8000/backend/course/" + classList[j].course_id)
                                                                                         .then(res => res.json())
                                                                                         .then((course) => {
-                                                                                        
+
                                                                                             setUpComingCourse(course)
-                                                                                            console.log('course', upComingCourse, course)
                                                                                             setHaveClass(true)
                                                                                             setReady(true)
                                                                                         }
                                                                                         )
-
-                                                                                    console.log(upComingCourse)
                                                                                     break
                                                                                 }
                                                                                 else {
@@ -166,31 +198,23 @@ function Home() {
                                                                             }
                                                                         }
                                                                     }
-                                                                    console.log(upComingCourse, upComingClass, otherClass)
+                                                                    setScheduledClass(course)
                                                                     setReady(true)
-
-
                                                                 },
                                                                 (error) => {
                                                                     console.log(error)
                                                                 }
                                                             )
-
-
                                                     },
                                                     (error) => {
                                                         console.log(error)
                                                     }
                                                 )
-                                            console.log('list', courseList)
-
-
                                         },
                                         (error) => {
                                             console.log(error)
                                         }
                                     )
-
                             }
                         }
                     },
@@ -201,7 +225,6 @@ function Home() {
                 )
         }
         getCourse()
-        console.log(enrollment, courseList, classList)
 
     }, []);
 
@@ -291,16 +314,61 @@ function Home() {
 
                         </Box>
                     ) : (
-                            <Box sx={{
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center'
-                            }}>
-                                <TimeTable ></TimeTable>
-                                <Button onClick={() => console.log(classList)} ></Button>
-                            </Box>
+                        <Box sx={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center'
+                        }} bgcolor="rgba(226, 227, 234, 0.27)">
 
-                        )
+                            <Stack spacing={2}>
+                                <Box sx={TtitleBarStyle}>
+                                    <Stack direction="row" mt={2.5}>
+                                        <Box sx={{ flexGrow: .2 }} />
+                                        <Typography component="div" sx={TsubTitleStyle}>
+                                            Course
+                                        </Typography>
+                                        <Box sx={{ flexGrow: .18 }} />
+                                        <Typography component="div" sx={TsubTitleStyle}>
+                                            Date
+                                        </Typography>
+                                        <Box sx={{ flexGrow: .19 }} />
+                                        <Typography component="div" sx={TsubTitleStyle}>
+                                            Time
+                                        </Typography>
+                                        <Box sx={{ flexGrow: .18 }} />
+                                        <Typography component="div" sx={TsubTitleStyle}>
+                                            Classroom
+                                        </Typography>
+                                    </Stack>
+                                    <Box sx={TcontentBarStyle} bgcolor="rgba(226, 227, 234, 0.27)"   >
+                                        {scheduledClass.map((sclass) =>
+                                            <Stack direction="row" mt={3}>
+                                                <Box sx={{ flexGrow: .2 }} />
+                                                <Typography component="div" mt={3} ml={2} sx={TcontentStyle}>
+                                                    COMPXXXX YYYY
+                                                </Typography>
+                                                <Box sx={{ flexGrow: .5 }} />
+                                                <Typography component="div" mt={3} sx={TcontentStyle}>
+                                                    {sclass.date}
+                                                </Typography>
+                                                <Box sx={{ flexGrow: .1 }} />
+                                                <Typography component="div" mt={3} sx={TcontentStyle}>
+                                                    {sclass.start_time}
+                                                </Typography>
+                                                <Box sx={{ flexGrow: .1 }} />
+                                                <Typography component="div" mt={3} sx={TcontentStyle}>
+                                                    {sclass.classroom}
+                                                </Typography>
+                                            </Stack>
+                                        )}
+                                    </Box>
+                                </Box>
+                            </Stack>
+
+                        </Box>
+
+
+                    )
                     }
 
                 </Stack>

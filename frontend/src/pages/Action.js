@@ -66,7 +66,6 @@ function Action() {
                 .then(res => res.json())
                 .then(
                     (result) => {
-                        console.log(result)
                         setLoginHist(result)
                         setReady(true)
                     }

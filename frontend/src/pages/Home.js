@@ -91,7 +91,7 @@ function Home() {
     const [ready, setReady] = useState(false)
     const [haveClass, setHaveClass] = useState(false)
     const [upComingClass, setUpComingClass] = useState(null)
-    const [upComingCourse, setCompingCourse] = useState(null)
+    const [upComingCourse, setUpComingCourse] = useState(null)
     const [courseList, setCourseList] = useState([])
 
 
@@ -149,8 +149,8 @@ function Home() {
                                                                                     fetch("http://127.0.0.1:8000/backend/course/" + classList[j].course_id)
                                                                                         .then(res => res.json())
                                                                                         .then((course) => {
-                                                                                            const ucCourse = course;
-                                                                                            setCompingCourse(course)
+                                                                                        
+                                                                                            setUpComingCourse(course)
                                                                                             console.log('course', upComingCourse, course)
                                                                                             setHaveClass(true)
                                                                                             setReady(true)

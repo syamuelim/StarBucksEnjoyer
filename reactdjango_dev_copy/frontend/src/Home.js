@@ -3,10 +3,10 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Grid from '@mui/system/Unstable_Grid';
 import { Stack } from '@mui/system';
-import ComingNoti from '../components/ComingNoti.js';
-import TimeTable from '../components/TimeTable.js';
+// import ComingNoti from '../components/ComingNoti.js';
+import TimeTable from './components/TimeTable.js';
 import Button from '@mui/material/Button';
-import InfoBar from '../components/InfoBar.js'
+// import InfoBar from '../components/InfoBar.js'
 import Toolbar from '@mui/material/Toolbar';
 
 const HomeTitleStyle = {

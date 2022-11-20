@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/system/Unstable_Grid';
 import { Stack } from '@mui/system';
 
-const titleStyle = {
+const TtitleStyle = {
     fontSize: 'h5.fontSize',
     fontWeight: 'Regular',
     lineHeight: '44px',
@@ -12,7 +12,7 @@ const titleStyle = {
     top: '171px',
 }
 
-const subTitleStyle = {
+const TsubTitleStyle = {
     width: '287.6px',
     height: '44.48px',
     fontSize: 'h5.fontSize',
@@ -21,7 +21,7 @@ const subTitleStyle = {
     lineHeight: '34px',
 }
 
-const contentStyle = {
+const TcontentStyle = {
     width: '400.6px',
     height: '44.48px',
     fontSize: 'h5.fontSize',
@@ -30,7 +30,7 @@ const contentStyle = {
     lineHeight: '34px',
 }
 
-const titleBarStyle = {
+const TtitleBarStyle = {
     width: "1268x",
     height: "71px",
     left: '84px',
@@ -39,7 +39,7 @@ const titleBarStyle = {
     borderRadius: '28px'
 }
 
-const contentBarStyle = {
+const TcontentBarStyle = {
     width: "1268x",
     height: "87px",
     background: '#FFFFFF',
@@ -75,106 +75,7 @@ class TimeTable extends Component {
                             </Typography>
                         </Stack>
                     </Box>
-                    <Box sx={contentBarStyle}>
-                        <Stack direction="row" mt={3}>
-                            <Box sx={{ flexGrow: .2 }} />
-                            <Typography component="div" sx={contentStyle}>
-                                COMP3278 Database Management
-                            </Typography>
-                            <Box sx={{ flexGrow: .5 }} />
-                            <Typography component="div" sx={contentStyle}>
-                                7 Nov (Mon)
-                            </Typography>
-                            <Box sx={{ flexGrow: .1 }} />
-                            <Typography component="div" sx={contentStyle}>
-                                12:30 - 14:20
-                            </Typography>
-                            <Box sx={{ flexGrow: .1 }} />
-                            <Typography component="div" sx={contentStyle}>
-                                KKL101
-                            </Typography>
-                        </Stack>
-                    </Box>
-                    <Box sx={contentBarStyle}>
-                        <Stack direction="row" mt={3}>
-                            <Box sx={{ flexGrow: .2 }} />
-                            <Typography component="div" sx={contentStyle}>
-                            COMPXXXX YYYY
-                            </Typography>
-                            <Box sx={{ flexGrow: .5 }} />
-                            <Typography component="div" sx={contentStyle}>
-                                7 Nov (Mon)
-                            </Typography>
-                            <Box sx={{ flexGrow: .1 }} />
-                            <Typography component="div" sx={contentStyle}>
-                                12:30 - 14:20
-                            </Typography>
-                            <Box sx={{ flexGrow: .1 }} />
-                            <Typography component="div" sx={contentStyle}>
-                                KKL101
-                            </Typography>
-                        </Stack>
-                    </Box>
-                    <Box sx={contentBarStyle}>
-                        <Stack direction="row" mt={3}>
-                            <Box sx={{ flexGrow: .2 }} />
-                            <Typography component="div" sx={contentStyle}>
-                            COMPXXXX YYYY
-                            </Typography>
-                            <Box sx={{ flexGrow: .5 }} />
-                            <Typography component="div" sx={contentStyle}>
-                                7 Nov (Mon)
-                            </Typography>
-                            <Box sx={{ flexGrow: .1 }} />
-                            <Typography component="div" sx={contentStyle}>
-                                12:30 - 14:20
-                            </Typography>
-                            <Box sx={{ flexGrow: .1 }} />
-                            <Typography component="div" sx={contentStyle}>
-                                KKL101
-                            </Typography>
-                        </Stack>
-                    </Box>
-                    <Box sx={contentBarStyle}>
-                        <Stack direction="row" mt={3}>
-                            <Box sx={{ flexGrow: .2 }} />
-                            <Typography component="div" sx={contentStyle}>
-                            COMPXXXX YYYY
-                            </Typography>
-                            <Box sx={{ flexGrow: .5 }} />
-                            <Typography component="div" sx={contentStyle}>
-                                7 Nov (Mon)
-                            </Typography>
-                            <Box sx={{ flexGrow: .1 }} />
-                            <Typography component="div" sx={contentStyle}>
-                                12:30 - 14:20
-                            </Typography>
-                            <Box sx={{ flexGrow: .1 }} />
-                            <Typography component="div" sx={contentStyle}>
-                                KKL101
-                            </Typography>
-                        </Stack>
-                    </Box>
-                    <Box sx={contentBarStyle}>
-                        <Stack direction="row" mt={3}>
-                            <Box sx={{ flexGrow: .2 }} />
-                            <Typography component="div" sx={contentStyle}>
-                            COMPXXXX YYYY
-                            </Typography>
-                            <Box sx={{ flexGrow: .5 }} />
-                            <Typography component="div" sx={contentStyle}>
-                                7 Nov (Mon)
-                            </Typography>
-                            <Box sx={{ flexGrow: .1 }} />
-                            <Typography component="div" sx={contentStyle}>
-                                12:30 - 14:20
-                            </Typography>
-                            <Box sx={{ flexGrow: .1 }} />
-                            <Typography component="div" sx={contentStyle}>
-                                KKL101
-                            </Typography>
-                        </Stack>
-                    </Box>
+
                     <Box sx={contentBarStyle}>
                         <Stack direction="row" mt={3}>
                             <Box sx={{ flexGrow: .2 }} />

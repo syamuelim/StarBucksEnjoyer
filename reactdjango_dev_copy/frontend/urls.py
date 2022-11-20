@@ -7,4 +7,5 @@ urlpatterns = [
     path('action', index),
     path('signup', index),
     path('faceid', index),
+    path('material', index),
 ]

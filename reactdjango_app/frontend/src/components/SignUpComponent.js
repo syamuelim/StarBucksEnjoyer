@@ -1,129 +1,323 @@
 import React, { Component, useState, useRef } from "react";
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import Grid from '@mui/system/Unstable_Grid';
 import { Stack } from '@mui/system';
-import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import { useNavigate } from 'react-router-dom';
+import FaceIDPic from './../../static/images/FaceID.png';
+import { useNavigate } from 'react-router-dom'
+import Webcam from "react-webcam";
+import TextField from '@mui/material/TextField';
+
+
+const boxStyle = {
+    background: 'rgba(255, 255, 255, 0.84)',
+    border: '12.8125px solid rgba(255, 255, 255, 0.23)',
+    boxShadow: '5.97917px 11.9583px 3.41667px rgba(0, 0, 0, 0.25)',
+    borderRadius: '44.4167px',
+    height: '750px',
+    width: '100%',
+    top: '10%',
+    position: 'relative',
+    left: '50%'
+
+}
 
 
 const titleStyle = {
-    fontSize: 'h4.fontSize',
-    fontWeight: 'medium',
-    lineHeight: '44px',
-    gridArea: 'main',
+    width: '268px',
+    height: '48px',
+    fontFamily: 'Roboto',
+    fontWeight: '200',
+    fontSize: ' 41px',
+    lineHeight: '48px',
+    letterSpacing: ' 0.25625px',
+    textTransform: 'uppercase',
+    color: '#000000'
+
+
+
 }
 
-const contentStyle = {
+const subTitleStyle = {
     fontSize: 'h6.fontSize',
     fontWeight: 'Regular',
     lineHeight: '44px',
-    color: '#5F5F5F',
+    color: '#000000',
+    top: '20px',
+    left: '492.85px',
+    top: '220.38px',
 }
 
-const textFieldStyle = {
-    background: '#FFFFFF',
-    borderRadius: '8px',
-    width: '488px',
-    height: '52px',
+const contentSytle = {
+    fontSize: 'h6.fontSize',
+    fontWeight: 'Regular',
+    lineHeight: '34px',
+    lineHeight: '34px',
 }
-const btnStyle1 = {
-    background: 'rgba(241, 195, 195, 0.6)',
-    borderRadius: '1px',
-    width: '488px',
-    height: '52px',
+
+const btnStyle = {
+    width: '416px',
+    height: '49px',
+    background: '#CF7575',
+    borderRadius: '12.8125px',
+
+
 }
-const btnStyle2 = {
-    background: 'rgba(207, 117, 117, 0.71)',
-    borderRadius: '1px',
-    width: '488px',
-    height: '52px',
+
+const contentStyle = {
+        fontSize: 'h6.fontSize',
+        fontWeight: 'Regular',
+        lineHeight: '44px',
+        color: '#5F5F5F',
 }
-const btnText = {
+
+const btnTextStyle = {
     width: '287.6px',
     height: '44.48px',
-    fontSize: 'h6.fontSize',
+    fontSize: 'h5.fontSize',
     fontWeight: 'Bold',
     lineHeight: '34px',
     lineHeight: '34px',
 }
 
+const imgStyle = {
+    width: '225px',
+    height: '225px',
+    left: '500px',
+    top: '307px',
+    display: 'flex', justifyContent: 'center'
+}
 
 function SignUpComponent() {
+
     const navigate = useNavigate()
-    const email = useRef('')
-    const name = useRef('')
-    const addFace = () => {
-        let modelPath = ''
+    const [openWebCam, setOpenWebCam] = useState(false);
+    const [photo, setPhoto] = useState(null);
+    const videoElement = useRef(null);
+
+    const videoConstraints = {
+        width: 226,
+        height: 226,
+        facingMode: "user"
+    }
+    const capture = () => {
+        // react version of ajax call
         fetch("http://127.0.0.1:8000/backend/FaceRecognition/")
             .then(res => res.json())
             .then(
                 (result) => {
-                    console.log('model trained')
+                    if (result[0] != '') {
+                        sessionStorage.setItem('user', result[0]);
+                        navigate('/signup')
+
+                    } else {
+                        alert('user not found')
+                    }
                 },
                 (error) => {
                     console.log(error)
                 }
             )
-        const options = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ name: name.current.value, email: email.current.value })
-        };
-        fetch('http://127.0.0.1:8000/backend/student/', options)
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    navigate('/')
-                },
-                (error) => {
-                    console.log(error)
-                }
-            );
+    }
+
+    const openCam = () => {
+        setOpenWebCam(true);
     }
 
 
     return (
-        <Box sx={{ height: '100%', width: '100%' }} ml={10}>
-
-
-            <Stack spacing={3}>
-                <Typography component="div" sx={titleStyle} mt={18}>
-                    Create an Account
-                </Typography>
-                <Typography component="div" sx={contentStyle} >
-                    USERNAME
-                </Typography>
-            </Stack>
-            <Stack spacing={2}>
-                <TextField inputRef={name} Required id="TFuserName" label="name" variant="outlined" sx={textFieldStyle} />
-                <Typography component="div" sx={contentStyle}>
-                    EMAIL
-                </Typography>
-            </Stack>
-            <Stack spacing={2}>
-                <TextField inputRef={email} Required id="TFemail" label="email" variant="outlined" sx={textFieldStyle} />
-
-            </Stack>
-            <Stack spacing={2}>
-                <Box></Box>
-                <Button variant="contained" sx={btnStyle1} mt={5} onClick={
-                    addFace
-                } >
-                    <Typography component="div" sx={btnText} mt={1}>
-                        ADD YOUR FACE ID
+        <Stack width="100%">
+            <Box sx={{ flexGrow: .5 }}></Box>
+            {/* <button onClick={runPython}> Click me </button> */}
+            <Box sx={boxStyle}>
+                <Stack spacing={2}>
+                    <Box sx={{ flexGrow: 3 }}></Box>
+                    <Typography component="div" sx={subTitleStyle} mt={2}>
+                        Sign Up For An Account
                     </Typography>
-                </Button>
+                    <Typography component="div" sx={contentStyle} >
+                         INPUT USERNAME
+                   </Typography>
+                   <TextField></TextField>
+
+                    <Stack direction="row" my={0}>
+                        <Box sx={{ flexGrow: .5 }}></Box>
+                        {!openWebCam ?
+                            (
+                                <Box textAlign="center" >
+                                    <Box sx={imgStyle} textAlign='center'>
+                                        <img src={FaceIDPic} alt="FaceIDPic" />
+                                    </Box>
+                                </Box>
+
+                            ) :
+                            (
+
+                                <Webcam audio={false} ref={videoElement} videoConstraints={videoConstraints} />
+
+                            )}
+                    </Stack>
+                    <Box sx={{ flexGrow: .4 }}></Box>
+                    <Box textAlign='center' >
+                        <Button variant="contained" sx={btnStyle} align="center" >
+                            {!openWebCam ?
+                                (
+                                    <Typography component="div" sx={btnTextStyle} mt={1} onClick={openCam}>
+                                        REGISTER WITH FACE ID
+                                    </Typography>
+                                ) :
+                                (
+                                    <Typography component="div" sx={btnTextStyle} mt={1} onClick={capture}>
+                                        REGISTER WITH FACE ID
+                                    </Typography>
+                                )
+                            }
+                        </Button>
+                        <Stack direction="row" my={0}>
+                            <Box sx={{ flexGrow: .5 }}>
+                            </Box>
+                    
+                        </Stack>
+                    </Box>
 
 
-            </Stack>
+                </Stack>
 
-
-
-        </Box>
+            </Box>
+        </Stack>
     );
 
 }
 
 export default SignUpComponent;
+
+
+// import React, { Component, useState, useRef } from "react";
+// import Typography from '@mui/material/Typography';
+// import Box from '@mui/material/Box';
+// import Grid from '@mui/system/Unstable_Grid';
+// import { Stack } from '@mui/system';
+// import TextField from '@mui/material/TextField';
+// import Button from '@mui/material/Button';
+// import { useNavigate } from 'react-router-dom';
+
+
+// const titleStyle = {
+//     fontSize: 'h4.fontSize',
+//     fontWeight: 'medium',
+//     lineHeight: '44px',
+//     gridArea: 'main',
+// }
+
+// const contentStyle = {
+//     fontSize: 'h6.fontSize',
+//     fontWeight: 'Regular',
+//     lineHeight: '44px',
+//     color: '#5F5F5F',
+// }
+
+// const textFieldStyle = {
+//     background: '#FFFFFF',
+//     borderRadius: '8px',
+//     width: '488px',
+//     height: '52px',
+// }
+// const btnStyle1 = {
+//     background: 'rgba(241, 195, 195, 0.6)',
+//     borderRadius: '1px',
+//     width: '488px',
+//     height: '52px',
+// }
+// const btnStyle2 = {
+//     background: 'rgba(207, 117, 117, 0.71)',
+//     borderRadius: '1px',
+//     width: '488px',
+//     height: '52px',
+// }
+// const btnText = {
+//     width: '287.6px',
+//     height: '44.48px',
+//     fontSize: 'h6.fontSize',
+//     fontWeight: 'Bold',
+//     lineHeight: '34px',
+//     lineHeight: '34px',
+// }
+
+
+// function SignUpComponent() {
+//     const navigate = useNavigate()
+//     const email = useRef('')
+//     const name = useRef('')
+//     const addFace = () => {
+//         let modelPath = ''
+//         fetch("http://127.0.0.1:8000/backend/FaceRecognition/")
+//             .then(res => res.json())
+//             .then(
+//                 (result) => {
+//                     console.log('model trained')
+//                 },
+//                 (error) => {
+//                     console.log(error)
+//                 }
+//             )
+//         const options = {
+//             method: 'POST',
+//             headers: { 'Content-Type': 'application/json' },
+//             body: JSON.stringify({ name: name.current.value, email: email.current.value })
+//         };
+//         fetch('http://127.0.0.1:8000/backend/student/', options)
+//             .then(res => res.json())
+//             .then(
+//                 (result) => {
+//                     navigate('/')
+//                 },
+//                 (error) => {
+//                     console.log(error)
+//                 }
+//             );
+//     }
+
+
+//     return (
+//         <Box sx={{ height: '100%', width: '100%' }} ml={10}>
+
+
+//             <Stack spacing={3}>
+//                 <Typography component="div" sx={titleStyle} mt={18}>
+//                     Create an Account
+//                 </Typography>
+//                 <Typography component="div" sx={contentStyle} >
+//                     USERNAME
+//                 </Typography>
+//             </Stack>
+//             <Stack spacing={2}>
+//                 <TextField inputRef={name} Required id="TFuserName" label="name" variant="outlined" sx={textFieldStyle} />
+//                 <Typography component="div" sx={contentStyle}>
+//                     EMAIL
+//                 </Typography>
+//             </Stack>
+//             <Stack spacing={2}>
+//                 <TextField inputRef={email} Required id="TFemail" label="email" variant="outlined" sx={textFieldStyle} />
+
+//             </Stack>
+//             <Stack spacing={2}>
+//                 <Box></Box>
+//                 <Button variant="contained" sx={btnStyle1} mt={5} onClick={
+//                     addFace
+//                 } >
+//                     <Typography component="div" sx={btnText} mt={1}>
+//                         ADD YOUR FACE ID
+//                     </Typography>
+//                 </Button>
+
+
+//             </Stack>
+
+
+
+//         </Box>
+//     );
+
+// }
+
+// export default SignUpComponent;
